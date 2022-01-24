@@ -3,9 +3,9 @@
 describe Budgerigar do
   let(:app) { Budgerigar.new }
 
-  context 'GET to /film_details' do
+  context 'GET to /' do
     context 'with an invalid param' do
-      let(:response) { get '/film_details?director=Ridley_Scott' }
+      let(:response) { get '/?director=Ridley_Scott' }
 
       it 'returns a 400' do
         expect(response.status).to eq(400)
@@ -13,7 +13,7 @@ describe Budgerigar do
     end
 
     context 'with too many params' do
-      let(:response) { get "/film_details?actor=Tom_Hanks&film=The_'Burbs" }
+      let(:response) { get "/?actor=Tom_Hanks&film=The_'Burbs" }
 
       it 'returns a 400' do
         expect(response.status).to eq(400)
@@ -21,7 +21,7 @@ describe Budgerigar do
     end
 
     context 'with an actor query' do
-      let(:response) { get '/film_details?actor=Tom_Hanks' }
+      let(:response) { get '/?actor=Tom_Hanks' }
 
       before do
         allow(DbpediaClient).to receive(:get).with('actor', 'Tom_Hanks')
@@ -44,7 +44,7 @@ describe Budgerigar do
     end
 
     context 'with a film query' do
-      let(:response) { get "/film_details?film=The_'Burbs" }
+      let(:response) { get "/?film=The_'Burbs" }
 
       before do
         allow(DbpediaClient).to receive(:get).with('film', "The_'Burbs")

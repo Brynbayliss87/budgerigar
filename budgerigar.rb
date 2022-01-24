@@ -20,7 +20,7 @@ class Budgerigar < Sinatra::Base
     halt 400, { error: 'Error, only one parameter supported' }.to_json if params.keys.length > 1
   end
 
-  get '/film_details' do
+  get '/' do
     key = params.keys.first
     cached_resp = RequestStore.instance.get(key, params[key])
     return { RESPONSE_KEYS[key] => cached_resp }.to_json if cached_resp
