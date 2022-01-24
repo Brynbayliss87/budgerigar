@@ -45,7 +45,7 @@ describe DbpediaClient do
       end
 
       it 'returns a list of actors from the film' do
-        expect(subject).to eq(%w[Tom_Hanks Tom_Sizemore])
+        expect(subject).to eq(['Tom Hanks', 'Tom Sizemore'])
       end
 
       context 'when the request fails' do
@@ -91,7 +91,7 @@ describe DbpediaClient do
       end
 
       it 'returns a list of films for the actor' do
-        expect(subject).to eq(['The_Ladykillers_(2004_film)', "You've_Got_Mail"])
+        expect(subject).to eq(['The Ladykillers (2004 film)', "You've Got Mail"])
       end
 
       context 'when the request fails' do

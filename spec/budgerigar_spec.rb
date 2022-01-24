@@ -25,16 +25,16 @@ describe Budgerigar do
 
       before do
         allow(DbpediaClient).to receive(:get).with('actor', 'Tom_Hanks')
-                                             .and_return(["The_'Burbs", 'Toy_Story'])
+                                             .and_return(["The 'Burbs", 'Toy Story'])
       end
 
       it 'returns a list of the actors films' do
-        expect(response.body).to eq({ 'films' => ["The_'Burbs", 'Toy_Story'] }.to_json)
+        expect(response.body).to eq({ 'films' => ["The 'Burbs", 'Toy Story'] }.to_json)
       end
 
       context 'when the response is cached' do
         before do
-          RequestStore.instance.set('actor', { 'Tom_Hanks' => ["The_'Burbs", 'Toy_Story'] })
+          RequestStore.instance.set('actor', { 'Tom_Hanks' => ["The 'Burbs", 'Toy Story'] })
         end
 
         it 'does not make a request' do
@@ -48,16 +48,16 @@ describe Budgerigar do
 
       before do
         allow(DbpediaClient).to receive(:get).with('film', "The_'Burbs")
-                                             .and_return(['Tom_Hanks'])
+                                             .and_return(['Tom Hanks'])
       end
 
       it 'returns a list of the films cast' do
-        expect(response.body).to eq({ 'actors' => ['Tom_Hanks'] }.to_json)
+        expect(response.body).to eq({ 'actors' => ['Tom Hanks'] }.to_json)
       end
 
       context 'when the response is cached' do
         before do
-          RequestStore.instance.set('film', { "The_'Burbs" => ['Tom_Hanks'] })
+          RequestStore.instance.set('film', { "The_'Burbs" => ['Tom Hanks'] })
         end
 
         it 'does not make a request' do

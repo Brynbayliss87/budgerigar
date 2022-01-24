@@ -29,7 +29,8 @@ class DbpediaClient
 
   def self.parse_response(resp)
     results = JSON.parse(resp)['results']['bindings'].map { |r| r['res']['value'] }
-    results.map { |r| r.split('/') }.map(&:last)
+    values = results.map { |r| r.split('/') }.map(&:last)
+    values.map { |val| val.gsub('_', ' ') }
   end
 
   private_class_method :actor_query, :film_query, :parse_response
